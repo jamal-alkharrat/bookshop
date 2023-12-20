@@ -1,0 +1,44 @@
+[
+  {
+    "ProduktID": "1",
+    "Produktcode": "PHP1",
+    "Produkttitel": "PHP im Überblick",
+    "Autorname": "Dr. Mustermann",
+    "Verlagsname": "Rheinwerk Verlag",
+    "PreisNetto": "100.00",
+    "Mwstsatz": "19.00",
+    "PreisBrutto": "119.00",
+    "Lagerbestand": "100",
+    "Kurzinhalt": "sehr gutes Buch zu PHP mit vielen Beispielen",
+    "Gewicht": "1.50",
+    "LinkGrafikdatei": "..."
+  },
+  {
+    "ProduktID": "2",
+    "Produktcode": "PHP1",
+    "Produkttitel": "Java im Überblick",
+    "Autorname": "Dr. Mustermann",
+    "Verlagsname": "Rheinwerk Verlag",
+    "PreisNetto": "50.00",
+    "Mwstsatz": "19.00",
+    "PreisBrutto": "58.50",
+    "Lagerbestand": "30",
+    "Kurzinhalt": "sehr gutes Buch zu Java mit vielen Beispielen",
+    "Gewicht": "1.70",
+    "LinkGrafikdatei": "..."
+  },
+  {
+    "ProduktID": "3",
+    "Produktcode": "PHP1",
+    "Produkttitel": "JavaScript im Überblick",
+    "Autorname": "Tom Meier",
+    "Verlagsname": "Springer Verlag",
+    "PreisNetto": "100.00",
+    "Mwstsatz": "19.00",
+    "PreisBrutto": "119.00",
+    "Lagerbestand": "40",
+    "Kurzinhalt": "sehr gutes Buch zu JavaScript mit vielen Beispielen",
+    "Gewicht": "1.70",
+    "LinkGrafikdatei": "..."
+  }
+]
