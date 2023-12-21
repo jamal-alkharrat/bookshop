@@ -1,9 +1,13 @@
 <script>
+import axios from 'axios';
+import { useUserStore } from '@/stores/userStore';
+
 export default {
     name: 'UserAuth',
     data() {
         return {
             user: null,
+            token: null,
             registerForm: {
                 username: '',
                 email: '',
@@ -20,18 +24,19 @@ export default {
         async register() {
             try {
                 console.log(`${this.apiUrl}register.php`);
-                const response = await fetch(`${this.apiUrl}register.php`, {
-                    method: 'POST',
+                const response = await axios.post(`${this.apiUrl}register.php`, this.registerForm, {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(this.registerForm),
                 });
-                const data = await response.json();
+                const data = response.data;
                 if (data.token) {
                     console.log("Register Received:  " + data.token);
-                    localStorage.setItem('token', data.token);
+                    this.token = data.token;
                     this.setUserFromToken();
+                    const userStore = useUserStore()
+                    userStore.setUsername(data.username)
+                    userStore.setEmail(data.email)
                 } else if (data.error) {
                     console.error('Error from PHP:', data.error);
                 }
@@ -46,19 +51,20 @@ export default {
         },
         async login() {
             try {
-                const response = await fetch(`${this.apiUrl}login.php`, {
-                    method: 'POST',
+                const response = await axios.post(`${this.apiUrl}login.php`, this.loginForm, {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(this.loginForm),
                 });
 
-                const data = await response.json();
+                const data = response.data;
                 if (data.token) {
                     console.log("Login Received:  " + data.token);
-                    localStorage.setItem('token', data.token);
+                    this.token = data.token;
                     this.setUserFromToken();
+                    const userStore = useUserStore()
+                    userStore.setUsername(data.username)
+                    userStore.setEmail(data.email)
                 } else if (data.error) {
                     console.error('Error from PHP:', data.error);
                 }
@@ -71,17 +77,13 @@ export default {
             }
         },
         logout() {
-            localStorage.removeItem('token');
+            this.token = null;
             this.user = null;
         },
         setUserFromToken() {
-            const token = localStorage.getItem('token');
-            console.log("Encryp. token: ");
-            console.log(token);
-            if (token) {
-                const decodedToken = this.parseJwt(token);
+            if (this.token) {
+                const decodedToken = this.parseJwt(this.token);
                 this.user = decodedToken;
-                console.log(decodedToken);
             }
         },
         parseJwt(token) {

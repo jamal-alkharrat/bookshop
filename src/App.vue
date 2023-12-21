@@ -1,6 +1,11 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { computed } from 'vue'
+import { useUserStore } from './stores/userStore';
+
+const store = useUserStore()
+// computed property to check if the user is an admin
+const isAdmin = computed(() => store.getUsername() === 'admin')
 </script>
 
 <template>
@@ -8,12 +13,14 @@ import HelloWorld from './components/HelloWorld.vue'
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/katalog">Katalog</RouterLink>
+        <!-- Show the adminView link only if the user is an admin -->
+        <RouterLink v-if="isAdmin" to="/admin">Admin View</RouterLink>
+        <!-- Show username from store -->
+        <p>{{ store.getUsername() }}</p>
       </nav>
     </div>
   </header>
