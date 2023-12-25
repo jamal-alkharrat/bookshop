@@ -9,29 +9,33 @@ This document describes the order process of the bookshop application. All order
 2. Create a table 'order' and 'order_items' to save order information
 
 ```sql
-CREATE TABLE `orders` (
-    `id` INT NOT NULL AUTO_INCREMENT,
-    `user_id` INT NOT NULL,
-    `total_price` DECIMAL(10,2) NOT NULL,
-    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (`id`)
+CREATE TABLE `bestellungen` (
+    `BestellungID` INT NOT NULL AUTO_INCREMENT,
+    `UserID` INT NOT NULL,
+    `GesamtPreis` DECIMAL(10,2) NOT NULL,
+    `Bestelldatum` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`BestellungID`),
+    FOREIGN KEY (`UserID`) REFERENCES `user`(`id`)
 );
 
-CREATE TABLE `order_items` (
-    `id` INT NOT NULL AUTO_INCREMENT,
-    `order_id` INT NOT NULL,
-    `book_id` INT NOT NULL,
-    `quantity` INT NOT NULL,
-    `price_per_book` DECIMAL(10,2) NOT NULL,
-    PRIMARY KEY (`id`),
-    FOREIGN KEY (`order_id`) REFERENCES `orders`(`id`)
+CREATE TABLE `bestellpositionen` (
+    `BestellpositionID` INT NOT NULL AUTO_INCREMENT,
+    `BestellungID` INT NOT NULL,
+    `ProduktID` INT NOT NULL,
+    `Anzahl` INT NOT NULL,
+    `PreisNetto` DECIMAL(10,2) NOT NULL,
+    `Mwstsatz` DECIMAL(10,2) NOT NULL,
+    `PreisBrutto` DECIMAL(10,2) NOT NULL,
+    PRIMARY KEY (`BestellpositionID`),
+    FOREIGN KEY (`BestellungID`) REFERENCES `bestellungen`(`BestellungID`),
+    FOREIGN KEY (`ProduktID`) REFERENCES `buecher`(`ProduktID`)
 );
+
 ```
 
-- Optional: Create test orders
+- Optional: Create dummy orders for testing
 
 ```sql
-INSERT INTO `orders` (`user_id`, `total_price`) VALUES (1, 10.00);
-INSERT INTO `order_items` (`order_id`, `book_id`, `quantity`, `price_per_book`) VALUES (1, 1, 1, 10.00);
+INSERT INTO `bestellungen` (`BestellungID`, `UserID`, `GesamtPreis`, `Bestelldatum`) VALUES (NULL, '1', '10.00', '2020-12-01 00:00:00');
+INSERT INTO `bestellpositionen` (`BestellpositionID`, `BestellungID`, `ProduktID`, `Anzahl`, `PreisNetto`, `Mwstsatz`, `PreisBrutto`) VALUES (NULL, '1', '1', '1', '10.00', '0.00', '10.00');
 ```
-
