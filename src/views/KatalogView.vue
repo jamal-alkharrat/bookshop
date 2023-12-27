@@ -1,5 +1,6 @@
 <script>
 import Cart from '../components/ShoppingCart.vue';
+import { useProductStore } from '@/stores/productStore';
 export default {
   data() {
     return {
@@ -25,12 +26,14 @@ export default {
   },
   methods: {
     fetchData() {
+      const productStore = useProductStore();
       console.log("Start fetch ...");
       fetch("http://localhost/api/fetch_books.php")
         .then((response) => response.json())
         .then((data) => {
           console.log("Data from fetch: ", data);
           this.products = data;
+          productStore.setProducts(data);
         });
       this.initializeOrderQuantity();
     },

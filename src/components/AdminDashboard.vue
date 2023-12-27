@@ -1,6 +1,10 @@
 <script>
 import { useOrderStore } from '@/stores/orderStore'
+import InventoryTable  from '@/components/InventoryTable.vue'
 export default {
+    components: {
+        InventoryTable
+    },
     data() {
         return {
             orders: [],
@@ -103,15 +107,15 @@ export default {
                                 </thead>
                                 <tbody>
                                     <tr v-for="position in orderStore.getOrderPositions" :key="position.BestellpositionID">
-                                        <td v-if="position.BestellungID === order.BestellungID">
-                                            {{ position.BestellpositionID }}
-                                        </td>
-                                        <td> {{ position.BestellungID }} </td>
-                                        <td> {{ position.ProduktID }} </td>
-                                        <td> {{ position.Anzahl }} </td>
-                                        <td> {{ position.PreisNetto }} </td>
-                                        <td> {{ position.Mwstsatz }} </td>
-                                        <td> {{ position.PreisBrutto }} </td>
+                                        <template v-if="position.BestellungID === order.BestellungID">
+                                            <td>{{ position.BestellpositionID }}</td>
+                                            <td>{{ position.BestellungID }}</td>
+                                            <td>{{ position.ProduktID }}</td>
+                                            <td>{{ position.Anzahl }}</td>
+                                            <td>{{ position.PreisNetto }}</td>
+                                            <td>{{ position.Mwstsatz }}</td>
+                                            <td>{{ position.PreisBrutto }}</td>
+                                        </template>
                                     </tr>
                                 </tbody>
                             </table>
@@ -119,6 +123,9 @@ export default {
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="inventory">
+            <InventoryTable />
         </div>
     </div>
 </template>

@@ -35,8 +35,8 @@ export default {
                     this.token = data.token;
                     this.setUserFromToken();
                     const userStore = useUserStore()
-                    userStore.setUsername(data.username)
-                    userStore.setEmail(data.email)
+                    userStore.setUser(data.userID, data.username, data.email, data.token)
+                    console.log("User from store: ", userStore.getUser);
                 } else if (data.error) {
                     console.error('Error from PHP:', data.error);
                 }
@@ -63,8 +63,8 @@ export default {
                     this.token = data.token;
                     this.setUserFromToken();
                     const userStore = useUserStore()
-                    userStore.setUsername(data.username)
-                    userStore.setEmail(data.email)
+                    userStore.setUser(data.userID, data.username, data.email, data.token)
+                    console.log("User from store: ", userStore.getUser);
                 } else if (data.error) {
                     console.error('Error from PHP:', data.error);
                 }
@@ -79,6 +79,8 @@ export default {
         logout() {
             this.token = null;
             this.user = null;
+            const userStore = useUserStore()
+            userStore.resetUser()
         },
         setUserFromToken() {
             if (this.token) {

@@ -1,25 +1,58 @@
-import { ref } from 'vue'
 import { defineStore } from 'pinia'
-
-export const useUserStore = defineStore('user', () => {
-  const username = ref('') // add username to store
-  const email = ref('') // add email to store
-
-  function setUsername(newUsername) {
-    username.value = newUsername
-  }
-
-  function setEmail(newEmail) {
-    email.value = newEmail
-  }
-
-  // Getter
-  function getUsername() {
-    return username.value
-  }
-  function getEmail() {
-    return email.value
-  }
-
-  return { username, email, setUsername, setEmail, getUsername, getEmail }
+export const useUserStore = defineStore({
+  id: 'userStore',
+  state: () => ({
+    userID: '',
+    username: '',
+    email: '',
+    token: '',
+  }),
+  actions: {
+    setUserID(userID) {
+      this.userID = userID
+    },
+    setUsername(username) {
+      this.username = username
+    },
+    setEmail(email) {
+      this.email = email
+    },
+    setToken(token) {
+      this.token = token
+    },
+    setUser(userID, username, email, token) {
+      this.userID = userID
+      this.username = username
+      this.email = email
+      this.token = token
+    },
+    resetUser() {
+      this.userID = ''
+      this.username = ''
+      this.email = ''
+      this.token = ''
+    },
+  },
+  getters: {
+    getUserID() {
+      return this.userID
+    },
+    getUsername() {
+      return this.username
+    },
+    getEmail() {
+      return this.email
+    },
+    getToken() {
+      return this.token
+    },
+    getUser() {
+      return {
+        userID: this.userID,
+        username: this.username,
+        email: this.email,
+        token: this.token,
+      }
+    },
+  },
 })

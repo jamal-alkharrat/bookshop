@@ -2,7 +2,7 @@
 
 This document describes the authentication process of the bookshop application. All authentication related files are saved in the folder `auth` and are accessible via the URL `http://localhost/auth/` for the dev branch.
 
-### Prepare the Database - MariaDB
+## Prepare the Database - MariaDB
 
 1. Connect to the database
 
@@ -18,7 +18,7 @@ CREATE TABLE user (
 );
 ```
 
-### Prepare a PHP Server
+## Prepare a PHP Server
 
 I used XAMPP to setup a PHP server. I created a folder 'auth' in the htdocs folder of XAMPP. All PHP files to handle the authentication are saved in this folder.
 
@@ -57,3 +57,6 @@ For further information on how to setup a PHP server with XAMPP visit the [XAMPP
 - I created connect.php to connect to the database. This is used to send queries to the database.
 - I seperated the function for generating tokens in its own file as well.
 
+## Prepare the Frontend - Vue.js
+
+**TODO: CREATE DOCUMENTAITON FOR FRONTEND.**

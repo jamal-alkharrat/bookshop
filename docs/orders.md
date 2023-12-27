@@ -14,6 +14,7 @@ CREATE TABLE `bestellungen` (
     `UserID` INT NOT NULL,
     `GesamtPreis` DECIMAL(10,2) NOT NULL,
     `Bestelldatum` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `StripeID` varchar(255),
     PRIMARY KEY (`BestellungID`),
     FOREIGN KEY (`UserID`) REFERENCES `user`(`id`)
 );

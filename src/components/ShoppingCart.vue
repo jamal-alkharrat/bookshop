@@ -4,9 +4,16 @@
         <p>Gesamtzahl Bücher: {{ totalBooks }}</p>
         <p>Gesamtpreis: €{{ totalPrice }}</p>
     </div>
+    <!-- Bestellen -->
+    <div class="cart-actions">
+        <button class="btn btn-primary" @click="orderBooks">Bestellen</button>
+    </div>
 </template>
   
 <script>
+import { useUserStore } from '@/stores/userStore';
+import { toRaw } from 'vue';
+import { loadStripe } from '@stripe/stripe-js';
 export default {
     props: ['orderQuantity', 'products'],
     computed: {
@@ -24,5 +31,48 @@ export default {
             return total.toFixed(2);
         },
     },
+    methods: {
+        orderBooks() {
+            let order = {};
+            const userStore = useUserStore()
+            order = {
+                orderQuantity: toRaw(this.orderQuantity),
+                totalPrice: toRaw(this.totalPrice),
+                userID: userStore.getUserID,
+            };
+            console.log("Order: ", order);
+            let data = JSON.stringify(order);
+
+            // Send order to PHP
+            fetch("http://localhost/payment/__STRIPE_DEMOS_2022/stripe_redirect.php?live=0", {
+                method: "POST",
+                body: data,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+                .then(response => response.json())
+                .then(async data => {
+                    console.log("Data from fetch: ", data);
+
+                    // Get the Stripe public key
+                    // Replace 'your_public_key' with your actual Stripe public key
+                    let stripe = await loadStripe('pk_test_51OPj2FDtljfWi561qNCDC0U2oYxqi2U3Ux1rfRoo1AoXENV9qZp3cu8PuQ21aFVGV2PRjT5TQQCKIjfY1r4RVVqe00P1EQ9PRG');
+
+                    // Use the session ID from the response to redirect to the checkout page
+                    stripe.redirectToCheckout({
+                        sessionId: data.sessionId
+                    }).then(function (result) {
+                        if (result.error) {
+                            console.error("Error during checkout: ", result.error.message);
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error("Error during fetch: ", error);
+                });
+        },
+    },
+
 };
 </script>
