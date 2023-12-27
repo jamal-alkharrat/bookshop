@@ -2,10 +2,10 @@ import { defineStore } from 'pinia'
 export const useUserStore = defineStore({
   id: 'userStore',
   state: () => ({
-    userID: '',
-    username: '',
-    email: '',
-    token: '',
+    userID: JSON.parse(localStorage.getItem('user'))?.id || null,
+    username: JSON.parse(localStorage.getItem('user'))?.username || null,
+    email: JSON.parse(localStorage.getItem('user'))?.email || null,
+    token: localStorage.getItem('user-token') || null,
   }),
   actions: {
     setUserID(userID) {
@@ -19,21 +19,37 @@ export const useUserStore = defineStore({
     },
     setToken(token) {
       this.token = token
+      localStorage.setItem('user-token', token);
     },
-    setUser(userID, username, email, token) {
-      this.userID = userID
-      this.username = username
-      this.email = email
-      this.token = token
+    setUser(user) {
+      this.userID = user.id;
+      this.username = user.username;
+      this.email = user.email;
+      localStorage.setItem('user', JSON.stringify(user));
     },
+    
     resetUser() {
-      this.userID = ''
-      this.username = ''
-      this.email = ''
-      this.token = ''
+      this.userID = null;
+      this.username = null;
+      this.email = null;
+      localStorage.removeItem('user');
+    },
+    login(token, user) {
+      this.token = token;
+      this.setUser(user);
+      localStorage.setItem('user-token', token);
+      // set the token to expire after 3600 seconds
+      setTimeout(() => {
+        this.logout();
+      }, 3600 * 1000);
+    },
+    logout() {
+      this.resetUser();
+      localStorage.removeItem('user-token');
     },
   },
   getters: {
+    isLoggedIn: state => !!state.token,
     getUserID() {
       return this.userID
     },

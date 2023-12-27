@@ -1,13 +1,11 @@
 <script>
 import axios from 'axios';
 import { useUserStore } from '@/stores/userStore';
-
 export default {
     name: 'UserAuth',
-    data() {
+    setup() {
+        const userStore = useUserStore();
         return {
-            user: null,
-            token: null,
             registerForm: {
                 username: '',
                 email: '',
@@ -17,7 +15,13 @@ export default {
                 email: '',
                 password: '',
             },
-            apiUrl: 'http://localhost/v1auth/'
+            apiUrl: 'http://localhost/v1auth/',
+            userStore,
+        };
+    },
+    data() {
+        return {
+            user: null,
         };
     },
     methods: {
@@ -32,11 +36,14 @@ export default {
                 const data = response.data;
                 if (data.token) {
                     console.log("Register Received:  " + data.token);
-                    this.token = data.token;
+                    let user = {
+                        id: data.userID,
+                        username: data.username,
+                        email: data.email,
+                    }
+                    this.userStore.login(data.token, user);
                     this.setUserFromToken();
-                    const userStore = useUserStore()
-                    userStore.setUser(data.userID, data.username, data.email, data.token)
-                    console.log("User from store: ", userStore.getUser);
+                    console.log("User from store: ", this.userStore.getUser);
                 } else if (data.error) {
                     console.error('Error from PHP:', data.error);
                 }
@@ -60,11 +67,13 @@ export default {
                 const data = response.data;
                 if (data.token) {
                     console.log("Login Received:  " + data.token);
-                    this.token = data.token;
+                    let user = {
+                        id: data.userID,
+                        username: data.username,
+                        email: data.email,
+                    }
+                    this.userStore.login(data.token, user);
                     this.setUserFromToken();
-                    const userStore = useUserStore()
-                    userStore.setUser(data.userID, data.username, data.email, data.token)
-                    console.log("User from store: ", userStore.getUser);
                 } else if (data.error) {
                     console.error('Error from PHP:', data.error);
                 }
@@ -77,14 +86,15 @@ export default {
             }
         },
         logout() {
-            this.token = null;
             this.user = null;
-            const userStore = useUserStore()
-            userStore.resetUser()
+            this.userStore.logout();
         },
         setUserFromToken() {
-            if (this.token) {
-                const decodedToken = this.parseJwt(this.token);
+            const token = localStorage.getItem('user-token');
+            console.log("Encryp. token: ");
+            console.log(token);
+            if (token) {
+                const decodedToken = this.parseJwt(this.userStore.getToken);
                 this.user = decodedToken;
             }
         },
@@ -100,6 +110,13 @@ export default {
     created() {
         this.setUserFromToken();
     },
+    mounted() {
+        console.log(this.isLoggedIn)
+        this.isLoggedIn = this.userStore.isLoggedIn;
+        console.log(this.isLoggedIn)
+        console.log("User from store: ", this.userStore.getUser);
+    },
+
 };
 </script>
 
@@ -109,7 +126,7 @@ export default {
 
         <!-- Benutzerinformationen -->
         <div v-if="user">
-            <p>Welcome, {{ user.username }}!</p>
+            <p>Welcome, {{ userStore.getUsername }}!</p>
             <button @click="logout">Logout</button>
         </div>
 

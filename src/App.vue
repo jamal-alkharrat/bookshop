@@ -10,17 +10,13 @@ const isAdmin = computed(() => store.getUsername === 'admin')
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
     <div class="wrapper">
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/katalog">Katalog</RouterLink>
         <!-- Show the adminView link only if the user is an admin -->
         <RouterLink v-if="isAdmin" to="/admin">Admin View</RouterLink>
-        <!-- Show username from store -->
-        <p>{{ store.getUsername }}</p>
+        <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>
   </header>
