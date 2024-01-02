@@ -6,6 +6,7 @@ export const useUserStore = defineStore({
     username: JSON.parse(localStorage.getItem('user'))?.username || null,
     email: JSON.parse(localStorage.getItem('user'))?.email || null,
     token: localStorage.getItem('user-token') || null,
+    isLoggedIn: localStorage.getItem('user-token') ? true : false,
   }),
   actions: {
     setUserID(userID) {
@@ -38,6 +39,7 @@ export const useUserStore = defineStore({
       this.token = token;
       this.setUser(user);
       localStorage.setItem('user-token', token);
+      this.isLoggedIn = true;
       // set the token to expire after 3600 seconds
       setTimeout(() => {
         this.logout();
@@ -46,10 +48,11 @@ export const useUserStore = defineStore({
     logout() {
       this.resetUser();
       localStorage.removeItem('user-token');
+      this.isLoggedIn = false;
     },
   },
   getters: {
-    isLoggedIn: state => !!state.token,
+    // isLoggedIn: state => !!state.token,
     getUserID() {
       return this.userID
     },

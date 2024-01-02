@@ -30,26 +30,3 @@
     </div>
   </div>
 </template>
-
-<style>
-.footer {
-  /* position: absolute; */
-  align-self: baseline;
-  bottom: 0;
-  width: 100%;
-  padding: 20px 0;
-}
-.logo-image {
-  padding: 20px 0;
-  width:60%;
-  height: auto;
-  object-fit: contain; /* Don't scale image */
-}
-@media (min-width: 1024px) {
-  .about {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-}
-</style>
