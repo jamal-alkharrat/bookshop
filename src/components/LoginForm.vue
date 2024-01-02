@@ -1,7 +1,6 @@
 <script>
 import axios from 'axios';
 import { useUserStore } from '@/stores/userStore';
-// import { setUserFromToken } from '@/utils/auth.js';
 export default {
     name: 'LoginForm',
     setup() {
@@ -15,11 +14,6 @@ export default {
             userStore,
         };
     },
-    // data() {
-    //     return {
-    //         user: null,
-    //     };
-    // },
     methods: {
         async login() {
             try {
@@ -38,7 +32,6 @@ export default {
                         email: data.email,
                     }
                     this.userStore.login(data.token, user);
-                    // setUserFromToken(this);
                     // Redirect to home page
                     this.$router.push('/');
                 } else if (data.error) {
@@ -53,9 +46,6 @@ export default {
             }
         },
     },
-    // created() {
-    //     setUserFromToken(this);
-    // },
 }
 </script>
 

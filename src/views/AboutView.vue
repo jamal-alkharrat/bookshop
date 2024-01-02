@@ -1,32 +1,14 @@
 <template>
-  <div class="about">
+  <div class="container">
     <h1>Bookshop</h1>
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
       voluptatum, quibusdam, quia, quae voluptatem voluptas quod dolorum
       voluptatibus quos voluptates quidem. Quisquam voluptatum, quibusdam,
       quia, quae voluptatem voluptas quod dolorum voluptatibus quos
-      voluptates quidem.	</p>
-      <img class="img-fluid p-3" src="../assets/bookshop-logo.jpg" alt="Bookshop" />
+      voluptates quidem. </p>
+    <img class="img-fluid p-3" src="../assets/bookshop-logo.jpg" alt="Bookshop" />
   </div>
-  
-  <div class="footer">
-    <div class="impressum">
-      <h1>Impressum</h1>
-      <p>
-        <strong>Angaben gemäß § 5 TMG</strong>
-      </p>
-      <p>Beispiel GmbH</p>
-      <p>Beispiel-Straße, 99</p>
-      <p>99999, Dresden</p>
-      <p>+49 0199 999999</p>
-      <p>+49 99999</p>
-      <p>admin@admin.com</p>
-      <p>bookshop.de</p>
-      <p>vertreten durch die Geschäftsführer: Max Maximilian</p>
-      <p>Registergericht der GmbH: Amtsgericht Dresden</p>
-      <p>Registernummer der GmbH: HRB 99999</p>
-      <p>USt- IDNr.: DE 999999999</p>
-    </div>
-  </div>
+
+
 </template>
