@@ -7,7 +7,7 @@
       voluptatibus quos voluptates quidem. Quisquam voluptatum, quibusdam,
       quia, quae voluptatem voluptas quod dolorum voluptatibus quos
       voluptates quidem.	</p>
-      <img class="logo-image" src="../assets/bookshop-logo.jpg" alt="Bookshop" />
+      <img class="img-fluid p-3" src="../assets/bookshop-logo.jpg" alt="Bookshop" />
   </div>
   
   <div class="footer">

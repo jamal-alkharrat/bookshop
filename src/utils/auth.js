@@ -1,3 +1,7 @@
+// Note: These functions are not used in this project
+// The user Auth is handled by the Vue components and the userStore
+// I kept these functions here for reference if needed in the future
+
 export function setUserFromToken(instance) {
     const token = localStorage.getItem('user-token');
     console.log("Encryp. token: ");

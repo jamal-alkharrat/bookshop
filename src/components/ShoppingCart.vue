@@ -44,7 +44,7 @@ export default {
             let data = JSON.stringify(order);
 
             // Send order to PHP
-            fetch("http://localhost/payment/__STRIPE_DEMOS_2022/stripe_redirect.php?live=0", {
+            fetch("http://localhost/payment/stripe_redirect.php?live=0", {
                 method: "POST",
                 body: data,
                 headers: {
@@ -54,12 +54,7 @@ export default {
                 .then(response => response.json())
                 .then(async data => {
                     console.log("Data from fetch: ", data);
-
-                    // Get the Stripe public key
-                    // Replace 'your_public_key' with your actual Stripe public key
                     let stripe = await loadStripe('pk_test_51OPj2FDtljfWi561qNCDC0U2oYxqi2U3Ux1rfRoo1AoXENV9qZp3cu8PuQ21aFVGV2PRjT5TQQCKIjfY1r4RVVqe00P1EQ9PRG');
-
-                    // Use the session ID from the response to redirect to the checkout page
                     stripe.redirectToCheckout({
                         sessionId: data.sessionId
                     }).then(function (result) {

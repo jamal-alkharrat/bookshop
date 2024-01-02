@@ -1,7 +1,7 @@
 <script>
 import axios from 'axios';
 import { useUserStore } from '@/stores/userStore';
-import { setUserFromToken } from '@/utils/auth.js';
+// import { setUserFromToken } from '@/utils/auth.js';
 export default {
     name: 'LoginForm',
     setup() {
@@ -38,7 +38,7 @@ export default {
                         email: data.email,
                     }
                     this.userStore.login(data.token, user);
-                    setUserFromToken(this);
+                    // setUserFromToken(this);
                     // Redirect to home page
                     this.$router.push('/');
                 } else if (data.error) {
@@ -69,7 +69,7 @@ export default {
                 <label for="inputPassword4" class="form-label">Password</label>
                 <input v-model="loginForm.password" required type="password" class="form-control" id="inputPassword4">
             </div>
-            <div class="col-12">
+            <div class="col-12 p-3">
                 <button type="submit" class="btn btn-primary">Sign in</button>
             </div>
         </form>

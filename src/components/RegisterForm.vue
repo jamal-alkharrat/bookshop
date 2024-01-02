@@ -1,7 +1,7 @@
 <script>
 import axios from 'axios';
 import { useUserStore } from '@/stores/userStore';
-import { setUserFromToken } from '@/utils/auth.js';
+// import { setUserFromToken } from '@/utils/auth.js';
 export default {
     name: 'RegisterForm',
     setup() {
@@ -34,7 +34,7 @@ export default {
                         email: data.email,
                     }
                     this.userStore.login(data.token, user);
-                    setUserFromToken(this);
+                    // setUserFromToken(this);
 
                     // Redirect to home page
                     this.$router.push('/');
