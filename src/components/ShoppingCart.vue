@@ -92,6 +92,7 @@ export default {
                     });
                 })
                 .catch(error => {
+                    response.text().then(text => console.log(text));
                     console.error("Error during fetch: ", error);
                 });
         },
