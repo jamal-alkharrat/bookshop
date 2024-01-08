@@ -36,6 +36,7 @@ import { useUserStore } from '@/stores/userStore';
 import { toRaw } from 'vue';
 import { loadStripe } from '@stripe/stripe-js';
 import { useOrderStore } from '@/stores/orderStore';
+import { STRIPE_SECRET_KEY } from '@/env.js';
 export default {
     setup() {
         const orderStore = useOrderStore();
@@ -82,7 +83,7 @@ export default {
                 .then(response => response.json())
                 .then(async data => {
                     console.log("Data from fetch: ", data);
-                    let stripe = await loadStripe('pk_test_51OPj2FDtljfWi561qNCDC0U2oYxqi2U3Ux1rfRoo1AoXENV9qZp3cu8PuQ21aFVGV2PRjT5TQQCKIjfY1r4RVVqe00P1EQ9PRG');
+                    let stripe = await loadStripe(STRIPE_SECRET_KEY);
                     stripe.redirectToCheckout({
                         sessionId: data.sessionId
                     }).then(function (result) {

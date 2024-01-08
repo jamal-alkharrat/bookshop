@@ -31,3 +31,4 @@ coverage
 .env
 .__STRIPE_DEMOS_2022/*
 __STRIPE_DEMOS_2022/
+env.js
