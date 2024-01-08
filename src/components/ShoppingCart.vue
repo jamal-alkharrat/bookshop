@@ -83,7 +83,7 @@ export default {
                 .then(response => response.json())
                 .then(async data => {
                     console.log("Data from fetch: ", data);
-                    let stripe = await loadStripe(String(process.env.STRIPE_SECRET_KEY));
+                    let stripe = await loadStripe("pk_test_51OPj2FDtljfWi561qNCDC0U2oYxqi2U3Ux1rfRoo1AoXENV9qZp3cu8PuQ21aFVGV2PRjT5TQQCKIjfY1r4RVVqe00P1EQ9PRG");
                     stripe.redirectToCheckout({
                         sessionId: data.sessionId
                     }).then(function (result) {
