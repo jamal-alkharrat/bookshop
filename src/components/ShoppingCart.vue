@@ -79,6 +79,7 @@ export default {
                     "Content-Type": "application/json",
                 },
             })
+                .then(response => console.log("Response from fetch: ",response.text()))
                 .then(response => response.json())
                 .then(async data => {
                     console.log("Data from fetch: ", data);
@@ -92,7 +93,6 @@ export default {
                     });
                 })
                 .catch(error => {
-                    response.text().then(text => console.log(text));
                     console.error("Error during fetch: ", error);
                 });
         },
