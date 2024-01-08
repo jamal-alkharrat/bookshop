@@ -1,15 +1,14 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="container">
+    <h1>Bookshop</h1>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+      voluptatum, quibusdam, quia, quae voluptatem voluptas quod dolorum
+      voluptatibus quos voluptates quidem. Quisquam voluptatum, quibusdam,
+      quia, quae voluptatem voluptas quod dolorum voluptatibus quos
+      voluptates quidem. </p>
+    <img class="img-fluid p-3" src="../assets/bookshop-logo.jpg" alt="Bookshop" />
   </div>
-</template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
-</style>
+
+</template>

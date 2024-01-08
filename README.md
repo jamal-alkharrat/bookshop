@@ -55,3 +55,30 @@ npm run test:e2e
 ```sh
 npm run lint
 ```
+
+
+### DB
+
+To run command line interface:
+
+```sh
+docker exec -it bookshop-db mariadb --user=root --password=<password>
+```
+
+To show all databases:
+
+```sh
+SHOW DATABASES;
+```
+
+To create a new database:
+
+```sh
+CREATE DATABASE bookshop;
+```
+
+To use a database:
+
+```sh
+USE bookshop;
+```
