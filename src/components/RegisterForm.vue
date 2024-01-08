@@ -11,7 +11,7 @@ export default {
                 email: '',
                 password: '',
             },
-            apiUrl: 'http://localhost/v1auth/',
+            apiUrl: 'https://ivm108.informatik.htw-dresden.de/ewa/g20/api/v1auth/',
             userStore,
         };
     },

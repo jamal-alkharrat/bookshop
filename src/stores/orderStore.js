@@ -4,7 +4,8 @@ export const useOrderStore = defineStore({
   id: 'orderStore',
   state: () => ({
     orders: [],
-    orderPositions: []
+    orderPositions: [],
+    orderQuantity: {}
   }),
   actions: {
     setOrders(orders) {
@@ -12,7 +13,24 @@ export const useOrderStore = defineStore({
     },
     setOrderPositions(orderPositions) {
       this.orderPositions = orderPositions
-    }
+    },
+    setOrderQuantity(orderQuantity) {
+      this.orderQuantity = orderQuantity
+    },
+    increaseOrderQuantity(product) {
+      if (!this.orderQuantity[product.ProduktID]) {
+        this.orderQuantity[product.ProduktID] = 0;
+      }
+      this.orderQuantity[product.ProduktID]++;
+    },
+    decreaseOrderQuantity(product) {
+      if (this.orderQuantity[product.ProduktID] > 0) {
+        this.orderQuantity[product.ProduktID]--;
+      }
+    },
+    resetOrderQuantity(product) {
+      this.orderQuantity[product.ProduktID] = 0;
+    },
   },
   getters: {
     getOrders() {

@@ -1,12 +1,21 @@
 <script>
 import Cart from '../components/ShoppingCart.vue';
 import { useProductStore } from '@/stores/productStore';
+import { useOrderStore } from '@/stores/orderStore';
+
 export default {
+  setup() {
+    const orderStore = useOrderStore();
+    return {
+      orderStore,
+    }
+  },
   data() {
     return {
       products: [],
       searchTerm: '',
       orderQuantity: {},
+      
     }
   },
   components: {
@@ -28,7 +37,7 @@ export default {
     fetchData() {
       const productStore = useProductStore();
       console.log("Start fetch ...");
-      fetch("http://localhost/api/fetch_books.php")
+      fetch("https://ivm108.informatik.htw-dresden.de/ewa/g20/api/books/fetch_books.php")
         .then((response) => response.json())
         .then((data) => {
           console.log("Data from fetch: ", data);
@@ -50,21 +59,22 @@ export default {
       for (let product of this.products) {
         this.orderQuantity[product.ProduktID] = 0;
       }
+      this.orderStore.setOrderQuantity(this.orderQuantity);
     },
-    increaseOrderQuantity(product) {
-      if (!this.orderQuantity[product.ProduktID]) {
-        this.orderQuantity[product.ProduktID] = 0;
-      }
-      this.orderQuantity[product.ProduktID]++;
-    },
-    decreaseOrderQuantity(product) {
-      if (this.orderQuantity[product.ProduktID] > 0) {
-        this.orderQuantity[product.ProduktID]--;
-      }
-    },
-    resetOrderQuantity(product) {
-      this.orderQuantity[product.ProduktID] = 0;
-    },
+    // increaseOrderQuantity(product) {
+    //   if (!this.orderQuantity[product.ProduktID]) {
+    //     this.orderQuantity[product.ProduktID] = 0;
+    //   }
+    //   this.orderQuantity[product.ProduktID]++;
+    // },
+    // decreaseOrderQuantity(product) {
+    //   if (this.orderQuantity[product.ProduktID] > 0) {
+    //     this.orderQuantity[product.ProduktID]--;
+    //   }
+    // },
+    // resetOrderQuantity(product) {
+    //   this.orderQuantity[product.ProduktID] = 0;
+    // },
     getImageSource(product) {
       console.log(product.LinkGrafikdatei);
       return product.LinkGrafikdatei;
@@ -98,9 +108,9 @@ export default {
         <label for="orderQuantity" class="form-label">Quantity:</label>
         <div class="input-group">
           <input type="number" class="form-control" id="orderQuantity" v-model="orderQuantity[product.ProduktID]">
-          <button class="btn btn-outline-primary" @click="increaseOrderQuantity(product)">+</button>
-          <button class="btn btn-outline-danger" v-on:click=decreaseOrderQuantity(product)>-</button>
-          <button class="btn btn-outline-danger" v-on:click=resetOrderQuantity(product)>
+          <button class="btn btn-outline-primary" @click="orderStore.increaseOrderQuantity(product)">+</button>
+          <button class="btn btn-outline-danger" v-on:click=orderStore.decreaseOrderQuantity(product)>-</button>
+          <button class="btn btn-outline-danger" v-on:click=orderStore.resetOrderQuantity(product)>
             <i class="bi bi-trash"></i></button>
         </div>
       </li>

@@ -8,7 +8,7 @@ export default {
         const updateMessage = ref('');
         const updateSuccessful = ref(false);
         return {
-            apiUrl: "http://localhost/api/",
+            apiUrl: "https://ivm108.informatik.htw-dresden.de/ewa/g20/api/books/",
             productStore,
             originalStock: {},
             updateSuccessful,
@@ -19,7 +19,7 @@ export default {
         fetchData() {
 
             console.log("Start fetch ...");
-            fetch("http://localhost/api/fetch_books.php")
+            fetch("https://ivm108.informatik.htw-dresden.de/ewa/g20/api/books/fetch_books.php")
                 .then((response) => response.json())
                 .then((data) => {
                     const productStore = useProductStore();

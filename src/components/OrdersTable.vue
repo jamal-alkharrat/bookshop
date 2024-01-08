@@ -4,7 +4,7 @@ export default {
     data() {
         return {
             orders: [],
-            apiUrl: 'http://localhost/api/',
+            apiUrl: 'https://ivm108.informatik.htw-dresden.de/ewa/g20/api/books/',
             bestellung: {
                 BestellungID: 0,
                 UserID: 0,
