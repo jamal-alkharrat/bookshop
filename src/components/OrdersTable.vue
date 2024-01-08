@@ -27,10 +27,8 @@ export default {
             try {
                 const response = await fetch(`${this.apiUrl}fetch_orders.php`);
                 const data = await response.json();
-                console.log("Data from fetch: ", data);
                 const orderStore = useOrderStore();
                 orderStore.setOrders(data);
-                console.log("Orders from store: ", orderStore.getOrders);
             } catch (error) {
                 console.error("Error during fetch: ", error);
             }
@@ -39,10 +37,8 @@ export default {
             try {
                 const response = await fetch(`${this.apiUrl}fetch_order_positions.php`);
                 const data = await response.json();
-                console.log("Data from fetch: ", data);
                 const orderStore = useOrderStore();
                 orderStore.setOrderPositions(data);
-                console.log("Order positions from store: ", orderStore.getOrderPositions);
             } catch (error) {
                 console.error("Error during fetch: ", error);
             }

@@ -36,11 +36,9 @@ export default {
   methods: {
     fetchData() {
       const productStore = useProductStore();
-      console.log("Start fetch ...");
       fetch("https://ivm108.informatik.htw-dresden.de/ewa/g20/api/books/fetch_books.php")
         .then((response) => response.json())
         .then((data) => {
-          console.log("Data from fetch: ", data);
           this.products = data;
           productStore.setProducts(data);
         });
@@ -61,27 +59,11 @@ export default {
       }
       this.orderStore.setOrderQuantity(this.orderQuantity);
     },
-    // increaseOrderQuantity(product) {
-    //   if (!this.orderQuantity[product.ProduktID]) {
-    //     this.orderQuantity[product.ProduktID] = 0;
-    //   }
-    //   this.orderQuantity[product.ProduktID]++;
-    // },
-    // decreaseOrderQuantity(product) {
-    //   if (this.orderQuantity[product.ProduktID] > 0) {
-    //     this.orderQuantity[product.ProduktID]--;
-    //   }
-    // },
-    // resetOrderQuantity(product) {
-    //   this.orderQuantity[product.ProduktID] = 0;
-    // },
     getImageSource(product) {
-      console.log(product.LinkGrafikdatei);
       return product.LinkGrafikdatei;
     },
   },
   mounted() {
-    console.log("mounted!");
     this.fetchData();
   },
 }

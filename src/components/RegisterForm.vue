@@ -26,7 +26,6 @@ export default {
                 });
                 const data = response.data;
                 if (data.token) {
-                    console.log("Register Received:  " + data.token);
                     let user = {
                         id: data.userID,
                         username: data.username,

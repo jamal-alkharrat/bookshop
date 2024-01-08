@@ -11,12 +11,12 @@ This document describes the order process of the bookshop application. All order
 ```sql
 CREATE TABLE `bestellungen` (
     `BestellungID` INT NOT NULL AUTO_INCREMENT,
-    `UserID` INT NOT NULL,
+    `UserID` INT,
     `GesamtPreis` DECIMAL(10,2) NOT NULL,
     `Bestelldatum` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `StripeID` varchar(255),
     PRIMARY KEY (`BestellungID`),
-    FOREIGN KEY (`UserID`) REFERENCES `user`(`id`)
+    FOREIGN KEY (`UserID`) REFERENCES `user`(`id`) ON DELETE SET NULL
 );
 
 CREATE TABLE `bestellpositionen` (
