@@ -79,7 +79,6 @@ export default {
                     "Content-Type": "application/json",
                 },
             })
-                .then(response => console.log("Response from fetch: ",response.text()))
                 .then(response => response.json())
                 .then(async data => {
                     console.log("Data from fetch: ", data);
