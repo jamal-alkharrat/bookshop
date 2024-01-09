@@ -26,7 +26,7 @@
     </div>
     <!-- Bestellen -->
     <div class="cart-actions">
-        <button class="btn btn-primary" @click="orderBooks" :disabled="!canOrder">Proceed to payment</button>
+        <button class="btn btn-primary" @click="orderBooks">Proceed to payment</button>
     </div>
 </template>
   
@@ -60,24 +60,6 @@ export default {
             }
             return total.toFixed(2);
         },
-        canOrder() {
-            let canOrder = true;
-            if ( this.totalBooks <= 0 ) {
-                return false;
-            }
-            for (let product of this.products) {
-                // if (this.orderQuantity[product.ProduktID] <= 0) {
-                //     canOrder = false;
-                //     break;
-                // }
-                // if (this.orderQuantity[product.ProduktID] > product.Lagerbestand) {
-                //     canOrder = false;
-                //     break;
-                // }
-                console.log(product);
-            }
-            return canOrder;
-        }
     },
     methods: {
         orderBooks() {
