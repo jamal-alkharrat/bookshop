@@ -15,7 +15,7 @@ export default {
       products: [],
       searchTerm: '',
       orderQuantity: {},
-      
+
     }
   },
   components: {
@@ -66,6 +66,21 @@ export default {
   mounted() {
     this.fetchData();
   },
+  watch: {
+    orderQuantity: {
+      handler(newValue) {
+        for (let key in newValue) {
+          if (newValue[key] < 0) {
+            this.orderQuantity[key] = 0;
+          }
+          if (newValue[key] > this.product.Lagerbestand) {
+            this.orderQuantity[key] = this.product.Lagerbestand;
+          }
+        }
+      },
+      deep: true
+    }
+  }
 }
 </script>
 
@@ -89,7 +104,8 @@ export default {
 
         <label for="orderQuantity" class="form-label">Quantity:</label>
         <div class="input-group">
-          <input type="number" class="form-control" id="orderQuantity" v-model="orderQuantity[product.ProduktID]">
+          <input type="number" class="form-control" id="orderQuantity" v-model="orderQuantity[product.Produkttitel]"
+            :max="product.Lagerbestand">
           <button class="btn btn-outline-primary" @click="orderStore.increaseOrderQuantity(product)">+</button>
           <button class="btn btn-outline-danger" v-on:click=orderStore.decreaseOrderQuantity(product)>-</button>
           <button class="btn btn-outline-danger" v-on:click=orderStore.resetOrderQuantity(product)>
@@ -98,11 +114,13 @@ export default {
       </li>
     </ul>
 
-    <div class="shopping-cart-btn"><button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-      aria-controls="offcanvasRight"><i class="bi bi-cart"></i>Shopping Cart</button></div>
-    
+    <div class="shopping-cart-btn"><button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-cart"></i>Shopping Cart</button>
+    </div>
 
-    <div class="offcanvas offcanvas-end" tabindex="-1" data-bs-scroll="true" data-bs-backdrop="false" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" data-bs-scroll="true" data-bs-backdrop="false" id="offcanvasRight"
+      aria-labelledby="offcanvasRightLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasRightLabel">Shopping Cart</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -116,7 +134,6 @@ export default {
 
 
 <style scoped>
-
 .shopping-cart-btn {
   position: fixed;
   bottom: 2vh;
@@ -124,6 +141,7 @@ export default {
   margin: 1rem;
   z-index: 1000;
 }
+
 @media (min-width: 576px) {
   .img-fluid {
     width: 300px;
