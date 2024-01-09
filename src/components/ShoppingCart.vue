@@ -1,5 +1,4 @@
 <template>
-
     <!-- Products added to cart -->
     <div class="cart-items">
         <div v-for="product in products" :key="product.ProduktID" class="cart-item">
@@ -27,7 +26,7 @@
     </div>
     <!-- Bestellen -->
     <div class="cart-actions">
-        <button class="btn btn-primary" @click="orderBooks">Proceed to payment</button>
+        <button class="btn btn-primary" @click="orderBooks" :disabled="!canOrder">Proceed to payment</button>
     </div>
 </template>
   
@@ -36,11 +35,14 @@ import { useUserStore } from '@/stores/userStore';
 import { toRaw } from 'vue';
 import { loadStripe } from '@stripe/stripe-js';
 import { useOrderStore } from '@/stores/orderStore';
+import { useProductStore } from '@/stores/productStore';
 export default {
     setup() {
         const orderStore = useOrderStore();
+        const productStore = useProductStore();
         return {
             orderStore,
+            productStore,
         };
     },
     props: ['orderQuantity', 'products'],
@@ -58,6 +60,24 @@ export default {
             }
             return total.toFixed(2);
         },
+        canOrder() {
+            let canOrder = true;
+            if ( this.totalBooks <= 0 ) {
+                return false;
+            }
+            for (let product of this.products) {
+                // if (this.orderQuantity[product.ProduktID] <= 0) {
+                //     canOrder = false;
+                //     break;
+                // }
+                // if (this.orderQuantity[product.ProduktID] > product.Lagerbestand) {
+                //     canOrder = false;
+                //     break;
+                // }
+                console.log(product);
+            }
+            return canOrder;
+        }
     },
     methods: {
         orderBooks() {
