@@ -35,11 +35,14 @@ import { useUserStore } from '@/stores/userStore';
 import { toRaw } from 'vue';
 import { loadStripe } from '@stripe/stripe-js';
 import { useOrderStore } from '@/stores/orderStore';
+import { useProductStore } from '@/stores/productStore';
 export default {
     setup() {
         const orderStore = useOrderStore();
+        const productStore = useProductStore();
         return {
             orderStore,
+            productStore,
         };
     },
     props: ['orderQuantity', 'products'],
@@ -59,8 +62,10 @@ export default {
         },
         canOrder() {
             let canOrder = this.totalBooks > 0;
+            let products = this.productStore.getProducts;
+            console.log(products);
             for (let key in this.orderQuantity) {
-                if (this.orderQuantity[key] <= 0 || this.orderQuantity[key] > this.product.Lagerbestand) {
+                if (this.orderQuantity[key] <= 0 || this.orderQuantity[key] > products[key].Lagerbestand) {
                     canOrder = false;
                     break;
                 }
