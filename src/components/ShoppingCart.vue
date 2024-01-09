@@ -26,7 +26,7 @@
     </div>
     <!-- Bestellen -->
     <div class="cart-actions">
-        <button class="btn btn-primary" @click="orderBooks">Proceed to payment</button>
+        <button class="btn btn-primary" @click="orderBooks" :disabled="canOrder">Proceed to payment</button>
     </div>
 </template>
   
@@ -59,6 +59,13 @@ export default {
                 total += (this.orderQuantity[product.ProduktID] || 0) * parseFloat(product.PreisBrutto);
             }
             return total.toFixed(2);
+        },
+        canOrder() {
+            // Check total books > 0
+            if (this.totalBooks <= 0) {
+                return false;
+            }
+            return true;
         },
     },
     methods: {
