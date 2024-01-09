@@ -18,6 +18,8 @@ VueJS Webstore for a bookshop
 
 This is a webstore built with VueJs for front-end. It uses a MariaDB to store the data and a PHP API to communicate with the database and handle the requests. For more information about the API, please visit [this repository](https://github.com/jamal-alkharrat/bookshop-php-api).
 
+- [Bookshop live Demo](https://bookshop-weld.vercel.app/)
+
 ## Features
 
 - [x] Responsive design
@@ -29,14 +31,6 @@ This is a webstore built with VueJs for front-end. It uses a MariaDB to store th
 - [x] Change product quantity as admin
 - [x] Authentication
 
-## Technologies
-
-- [VueJs](https://vuejs.org/)
-- [Vite](https://vitejs.dev/)
-- [MariaDB](https://mariadb.org/)
-- [PHP](https://www.php.net/)
-- [Stripe](https://stripe.com/)
-- [Vitest](https://vitest.dev/)
 
 ## Project Structure
 
@@ -101,3 +95,13 @@ npm run test:e2e
 ```sh
 npm run lint
 ```
+
+## Technologies
+
+- [VueJs](https://vuejs.org/)
+- [Vite](https://vitejs.dev/)
+- [MariaDB](https://mariadb.org/)
+- [PHP](https://www.php.net/)
+- [Stripe](https://stripe.com/)
+- [Vitest](https://vitest.dev/)
+
