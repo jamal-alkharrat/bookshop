@@ -21,7 +21,14 @@ export const useOrderStore = defineStore({
       if (!this.orderQuantity[product.ProduktID]) {
         this.orderQuantity[product.ProduktID] = 0;
       }
-      this.orderQuantity[product.ProduktID]++;
+      if (this.orderQuantity[product.ProduktID] < product.Lagerbestand)
+      {
+        this.orderQuantity[product.ProduktID]++;
+      }
+      if (this.orderQuantity[product.ProduktID] > product.Lagerbestand)
+      {
+        this.orderQuantity[product.ProduktID] = product.Lagerbestand;
+      }
     },
     decreaseOrderQuantity(product) {
       if (this.orderQuantity[product.ProduktID] > 0) {

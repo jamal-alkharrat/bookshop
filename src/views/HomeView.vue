@@ -65,21 +65,6 @@ export default {
   mounted() {
     this.fetchData();
   },
-  watch: {
-    orderQuantity: {
-      handler(newValue) {
-        for (let key in newValue) {
-          if (newValue[key] < 0) {
-            this.orderQuantity[key] = 0;
-          }
-          if (newValue[key] > this.product.Lagerbestand) {
-            this.orderQuantity[key] = this.product.Lagerbestand;
-          }
-        }
-      },
-      deep: true
-    }
-  }
 }
 </script>
 
