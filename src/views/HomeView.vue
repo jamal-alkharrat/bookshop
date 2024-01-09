@@ -2,7 +2,6 @@
 import Cart from '../components/ShoppingCart.vue';
 import { useProductStore } from '@/stores/productStore';
 import { useOrderStore } from '@/stores/orderStore';
-
 export default {
   setup() {
     const orderStore = useOrderStore();
