@@ -63,7 +63,11 @@ export default {
         canOrder() {
             let canOrder = this.totalBooks > 0;
             for (let product of this.products) {
-                if (this.orderQuantity[product.ProduktID] <= 0 || this.orderQuantity[product.ProduktID] > product.Lagerbestand) {
+                if (this.orderQuantity[product.ProduktID] <= 0) {
+                    canOrder = false;
+                    break;
+                }
+                if (this.orderQuantity[product.ProduktID] > product.Lagerbestand) {
                     canOrder = false;
                     break;
                 }
