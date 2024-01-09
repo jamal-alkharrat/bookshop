@@ -1,5 +1,4 @@
 <template>
-
     <!-- Products added to cart -->
     <div class="cart-items">
         <div v-for="product in products" :key="product.ProduktID" class="cart-item">
@@ -27,7 +26,7 @@
     </div>
     <!-- Bestellen -->
     <div class="cart-actions">
-        <button class="btn btn-primary" @click="orderBooks">Proceed to payment</button>
+        <button class="btn btn-primary" @click="orderBooks" :disabled="!canOrder">Proceed to payment</button>
     </div>
 </template>
   
@@ -58,6 +57,16 @@ export default {
             }
             return total.toFixed(2);
         },
+        canOrder() {
+            let canOrder = this.totalBooks > 0;
+            for (let key in this.orderQuantity) {
+                if (this.orderQuantity[key] <= 0 || this.orderQuantity[key] > this.product.Lagerbestand) {
+                    canOrder = false;
+                    break;
+                }
+            }
+            return canOrder;
+        }
     },
     methods: {
         orderBooks() {
