@@ -95,6 +95,7 @@ export default {
           <p>Title: "<strong>{{ product.Produkttitel }}</strong>"</p>
           <p>Info: "{{ product.Kurzinhalt }}"</p>
           <p>Author: "{{ product.Autorname }}"</p>
+          <p>Avaliable quantity: {{ product.Lagerbestand }}</p>
         </div>
 
         <div class="row">
@@ -103,8 +104,7 @@ export default {
 
         <label for="orderQuantity" class="form-label">Quantity:</label>
         <div class="input-group">
-          <input type="number" class="form-control" id="orderQuantity" v-model="orderQuantity[product.Produkttitel]"
-            :max="product.Lagerbestand">
+          <input type="number" class="form-control" id="orderQuantity" v-model="orderQuantity[product.Produkttitel]">
           <button class="btn btn-outline-primary" @click="orderStore.increaseOrderQuantity(product)">+</button>
           <button class="btn btn-outline-danger" v-on:click=orderStore.decreaseOrderQuantity(product)>-</button>
           <button class="btn btn-outline-danger" v-on:click=orderStore.resetOrderQuantity(product)>

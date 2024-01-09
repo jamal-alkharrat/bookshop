@@ -62,9 +62,8 @@ export default {
         },
         canOrder() {
             let canOrder = this.totalBooks > 0;
-            console.log(this.products);
-            for (let key in this.orderQuantity) {
-                if (this.orderQuantity[key] <= 0 || this.orderQuantity[key] > this.products[key].Lagerbestand) {
+            for (let product of this.products) {
+                if (this.orderQuantity[product.ProduktID] <= 0 || this.orderQuantity[product.ProduktID] > product.Lagerbestand) {
                     canOrder = false;
                     break;
                 }
