@@ -63,9 +63,9 @@ export default {
         canOrder() {
             // Check total books > 0
             if (this.totalBooks <= 0) {
-                return false;
+                return true;
             }
-            return true;
+            return false;
         },
     },
     methods: {
