@@ -1,15 +1,17 @@
 <script>
 import axios from 'axios';
 import { useUserStore } from '@/stores/userStore';
+import { reactive } from 'vue';
 export default {
     name: 'LoginForm',
     setup() {
         const userStore = useUserStore();
+        const loginForm = reactive({
+            email: '',
+            password: '',
+        })
         return {
-            loginForm: {
-                email: '',
-                password: '',
-            },
+            loginForm,
             apiUrl: 'https://ivm108.informatik.htw-dresden.de/ewa/g20/api/v1auth/',
             userStore,
         };
@@ -49,20 +51,19 @@ export default {
 </script>
 
 <template>
-        <form class="row align-items-center" @submit.prevent="login">
-            <div class="col-md-6">
-                <label for="inputEmail4" class="form-label">Email</label>
-                <input v-model="loginForm.email" required type="email" class="form-control" id="inputEmail4">
-            </div>
-            <div class="col-md-6">
-                <label for="inputPassword4" class="form-label">Password</label>
-                <input v-model="loginForm.password" required type="password" class="form-control" id="inputPassword4">
-            </div>
-            <div class="col-12 p-3">
-                <button type="submit" class="btn btn-primary">Sign in</button>
-            </div>
-        </form>
+    <form class="row align-items-center" @submit.prevent="login">
+        <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">Email</label>
+            <input v-model="loginForm.email" required type="email" class="form-control" id="inputEmail4">
+        </div>
+        <div class="col-md-6">
+            <label for="inputPassword4" class="form-label">Password</label>
+            <input v-model="loginForm.password" required type="password" class="form-control" id="inputPassword4">
+        </div>
+        <div class="col-12 p-3">
+            <button type="submit" class="btn btn-primary">Sign in</button>
+        </div>
+    </form>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
