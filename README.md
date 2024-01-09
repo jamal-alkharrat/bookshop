@@ -4,8 +4,9 @@ VueJS Webstore for a bookshop
 
 ## Table of Contents
 
+- [About](#about)
+- [Features](#features)
 - [Project Structure](#project-structure)
-- [Recommended IDE Setup](#recommended-ide-setup)
 - [Customize configuration](#customize-configuration)
 - [Project Setup](#project-setup)
   - [Compile and Hot-Reload for Development](#compile-and-hot-reload-for-development)
@@ -13,6 +14,7 @@ VueJS Webstore for a bookshop
   - [Run Unit Tests with Vitest](#run-unit-tests-with-vitest)
   - [Run End-to-End Tests with Cypress](#run-end-to-end-tests-with-cypress)
   - [Lint with ESLint](#lint-with-eslint)
+- [Technologies](#technologies)
 
 ## About
 
