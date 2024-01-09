@@ -89,7 +89,7 @@ export default {
 
         <label for="orderQuantity" class="form-label">Quantity:</label>
         <div class="input-group">
-          <input type="number" class="form-control" id="orderQuantity" v-model="orderQuantity[product.ProduktID]">
+          <input type="number" class="form-control" id="orderQuantity" v-model="orderQuantity[product.ProduktID]" min="0" :max="product.Lagerbestand">
           <button class="btn btn-outline-primary" @click="orderStore.increaseOrderQuantity(product)">+</button>
           <button class="btn btn-outline-danger" v-on:click=orderStore.decreaseOrderQuantity(product)>-</button>
           <button class="btn btn-outline-danger" v-on:click=orderStore.resetOrderQuantity(product)>
